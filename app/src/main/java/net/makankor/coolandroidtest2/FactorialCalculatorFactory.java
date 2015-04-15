@@ -5,6 +5,11 @@ package net.makankor.coolandroidtest2;
  */
 public class FactorialCalculatorFactory {
     public FactorialCalculator create() {
-        return new FactorialCalculator(new FactorialEngineImpl());
+        return new FactorialCalculator(new FactorialEngineImpl(), new Logger() {
+            @Override
+            public void log(String text) {
+
+            }
+        });
     }
 }

@@ -12,11 +12,12 @@ public class FactorialCalculatorTest {
     private FactorialCalculator instance;
     private FactorialEngineStub factorialEngine;
     private static final int DEF_RESULT_VALUE = 15333343;
+    private Logger logger;
 
     @Before
     public void setup() {
         factorialEngine = new FactorialEngineStub();
-        instance = new FactorialCalculator(factorialEngine);
+        instance = new FactorialCalculator(factorialEngine, new FakeLogger());
     }
 
     @Test
@@ -37,6 +38,14 @@ public class FactorialCalculatorTest {
 
         public int getLastParam() {
             return lastParam;
+        }
+    }
+
+    private static class FakeLogger implements Logger {
+
+        @Override
+        public void log(String text) {
+            System.out.println("Log: " + text);
         }
     }
 

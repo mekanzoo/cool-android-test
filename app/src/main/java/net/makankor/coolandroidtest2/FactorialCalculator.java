@@ -5,12 +5,15 @@ package net.makankor.coolandroidtest2;
  */
 public class FactorialCalculator {
     private FactorialEngine factorialEngine;
+    private Logger logger;
 
-    public FactorialCalculator(FactorialEngine factorialEngine) {
+    public FactorialCalculator(FactorialEngine factorialEngine, Logger logger) {
         this.factorialEngine = factorialEngine;
+        this.logger = logger;
     }
 
     public int factorial(int num) {
-       return factorialEngine.doCalculateFactorial(num);
+        logger.log("Calculating factorial for " + num);
+        return factorialEngine.doCalculateFactorial(num);
     }
 }
