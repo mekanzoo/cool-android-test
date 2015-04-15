@@ -3,6 +3,7 @@ package net.makankor.coolandroidtest2;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
  * Created by addy on 4/15/15.
@@ -10,20 +11,23 @@ import org.junit.Test;
 public class FactorialCalculatorTest {
 
     private FactorialCalculator instance;
-    private FactorialEngineStub factorialEngine;
+    private FactorialEngine factorialEngine;
     private static final int DEF_RESULT_VALUE = 15333343;
-    private Logger logger;
 
     @Before
     public void setup() {
-        factorialEngine = new FactorialEngineStub();
+        factorialEngine = Mockito.mock(FactorialEngine.class);
         instance = new FactorialCalculator(factorialEngine, new FakeLogger());
     }
 
     @Test
     public void factorialShouldReturnValueFromFactorialEngine() {
-        Assert.assertEquals(DEF_RESULT_VALUE, instance.factorial(523));
-        Assert.assertEquals(523, factorialEngine.getLastParam());
+        int num = 333;
+        int output = 666;
+        Mockito.when(factorialEngine.doCalculateFactorial(num)).thenReturn(output);
+
+        Assert.assertEquals(output, instance.factorial(num));
+//        Mockito.verify(factorialEngine).doCalculateFactorial(num);
     }
 
 
